@@ -1,2 +1,2 @@
 numpy
-git+git://github.com/spcl/dace
+git+git://github.com/andreaskuster/dace@master
