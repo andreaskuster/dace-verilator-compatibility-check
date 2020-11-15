@@ -2,7 +2,15 @@ language: python
 python:
   - "3.8"
 env:
-  - VERILATOR_VERSION="4.028"
+  - VERILATOR_VERSION="4.102" # latest version@15/11/2020
+  - VERILATOR_VERSION="4.100"
+  - VERILATOR_VERSION="4.040"
+  - VERILATOR_VERSION="4.038"
+  - VERILATOR_VERSION="4.036"
+  - VERILATOR_VERSION="4.034"
+  - VERILATOR_VERSION="4.032"
+  - VERILATOR_VERSION="4.030"
+  - VERILATOR_VERSION="4.028" # oldest supported version
 cache:
   directories:
     -  $TRAVIS_BUILD_DIR/verilator
