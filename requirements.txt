@@ -1,2 +1,2 @@
 numpy
-git+git://github.com/andreaskuster/dace@add_verilator_trace_support
+git+git://github.com/spcl/dace
