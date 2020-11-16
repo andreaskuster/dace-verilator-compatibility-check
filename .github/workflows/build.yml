@@ -10,7 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: install apt packages
-        run: sudo apt-get install verilator
+        run: sudo apt-get update && sudo apt-get -y install git make autoconf g++
+      - name: compile verilator
+        run: git clone https://github.com/verilator/verilator.git && cd verilator && autoconf && ./configure && make -j2 && sudo make install
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
