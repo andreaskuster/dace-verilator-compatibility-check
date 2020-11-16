@@ -2,9 +2,10 @@ name: DaCe Verilator Compatibility Check
 on:
   workflow_dispatch:
     inputs:
-      tags:
+      reason:
+        description: 'Reason for the trigger'
         required: true
-        description: 'Reason for the trigger' 
+        default: 'Check compatibility'
   schedule:
     - cron: '0 0 1 * *' # monthly
 jobs:
@@ -15,7 +16,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:    
       - name: trigger reason 
-        run: echo "Trigger Reason:" ${{ github.event.tags.description }}
+        run: echo "Trigger Reason:" ${{ github.event.inputs.reason }}
       - uses: actions/checkout@v2
       - name: install apt packages
         run: sudo apt-get update && sudo apt-get -y install git make autoconf g++ flex bison libfl2 libfl-dev
