@@ -14,7 +14,7 @@ jobs:
         verilator_version: ['4.028', '4.030', '4.032', '4.034', '4.036', '4.038', '4.040', '4.100', '4.102', 'master']
     runs-on: ubuntu-20.04
     steps:    
-      - name: trigger reason
+      - name: trigger reason 
         run: echo "Trigger Reason:" ${{ github.event.tags.description }}
       - uses: actions/checkout@v2
       - name: install apt packages
