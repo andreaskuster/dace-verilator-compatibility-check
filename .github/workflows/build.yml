@@ -1,21 +1,25 @@
 name: DaCe Verilator Compatibility Check
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
+    inputs:
+      tags:
+        required: true
+        description: 'Reason for the trigger' 
   schedule:
     - cron: '0 0 1 * *' # monthly
 jobs:
   build:
     strategy:
       matrix:
-        verilator_version: ['4.028', '4.030', '4.032', '4.034', '4.036', '4.038', '4.040', '4.100', '4.102']
+        verilator_version: ['4.028', '4.030', '4.032', '4.034', '4.036', '4.038', '4.040', '4.100', '4.102', 'master']
     runs-on: ubuntu-20.04
-    steps:
+    steps:    
+      - run: echo "Trigger Reason: ${{ github.event.tags.description }}"
       - uses: actions/checkout@v2
       - name: install apt packages
         run: sudo apt-get update && sudo apt-get -y install git make autoconf g++ flex bison libfl2 libfl-dev
       - name: compile verilator
-        run: git clone https://github.com/verilator/verilator.git && cd verilator && git fetch origin && git checkout v${{ matrix.verilator_version }} && autoconf && ./configure && make -j2 && sudo make install
+        run: git clone https://github.com/verilator/verilator.git && cd verilator && git fetch origin && if [ ! ${{ matrix.verilator_version }} == "master" ]; then  git checkout v${{ matrix.verilator_version }} fi && autoconf && ./configure && make -j2 && sudo make install
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
