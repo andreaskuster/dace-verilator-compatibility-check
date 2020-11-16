@@ -3,7 +3,10 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: '0 0 * * 0' # weekly
+    - cron: '0 0 1 * *' # monthly
+strategy:
+  matrix:
+    verlator_version: ['4.028']
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -12,7 +15,7 @@ jobs:
       - name: install apt packages
         run: sudo apt-get update && sudo apt-get -y install git make autoconf g++ flex bison libfl2 libfl-dev
       - name: compile verilator
-        run: git clone https://github.com/verilator/verilator.git && cd verilator && autoconf && ./configure && make -j2 && sudo make install
+        run: git clone https://github.com/verilator/verilator.git && cd verilator && git fetch origin && git checkout v${{ matrix.verilator_version }} && autoconf && ./configure && make -j2 && sudo make install
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
