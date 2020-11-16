@@ -1,4 +1,4 @@
-# dace-verilator-compatibility-check [![Build Status](https://travis-ci.com/andreaskuster/dace-verilator-compatibility-check.svg?branch=add_verilator_trace_support)](https://travis-ci.com/github/andreaskuster/dace-verilator-compatibility-check)
+# dace-verilator-compatibility-check ![DaCe Verilator Compatibility Check](https://github.com/andreaskuster/dace-verilator-compatibility-check/workflows/DaCe%20Verilator%20Compatibility%20Check/badge.svg?branch=main)
 
 ## Compilation Commands
 
