@@ -1,2 +1,2 @@
 numpy
-git+git://github.com/andreaskuster/dace@master
+git+git://github.com/andreaskuster/dace@fix_compatibility_verilator_41xx
