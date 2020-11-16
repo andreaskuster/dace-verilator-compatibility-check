@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        verilator_version: ['4.028']
+        verilator_version: ['4.028', '4.030', '4.032', '4.034', '4.036', '4.038', '4.040', '4.100', '4.102']
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -24,3 +24,4 @@ jobs:
         with:
           requirements: requirements.txt
       - run: python minimal_example.py
+        
