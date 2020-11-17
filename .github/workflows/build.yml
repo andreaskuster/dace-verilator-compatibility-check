@@ -12,14 +12,16 @@ jobs:
   build:
     strategy:
       matrix:
-        verilator_version: ${{ curl -s 'https://api.github.com/repos/verilator/verilator/tags' | jq -r 'map(select(.name >= "v4.028")) | [.[].name]' }}
+        verilator_version: []
     runs-on: ubuntu-20.04
     steps:
       - name: trigger reason
         run: echo "Trigger Reason:" ${{ github.event.inputs.reason }}
       - uses: actions/checkout@v2
       - name: install apt packages
-        run: sudo apt-get update && sudo apt-get -y install git make autoconf g++ flex bison libfl2 libfl-dev
+        run: sudo apt-get update && sudo apt-get -y install git make autoconf g++ flex bison libfl2 libfl-dev curl jq
+      - name: get versions
+        run: ${{ matrix.verilator_version }} = curl -s 'https://api.github.com/repos/verilator/verilator/tags' | jq -r 'map(select(.name >= "v4.028")) | [.[].name]'
       - name: compile verilator
         run: git clone https://github.com/verilator/verilator.git && cd verilator && git fetch origin && if [ ! "${{ matrix.verilator_version }}" == "master" ]; then  git checkout v${{ matrix.verilator_version }}; fi && autoconf && ./configure && make -j2 && sudo make install
       - uses: actions/setup-python@v2
